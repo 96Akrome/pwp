@@ -1,0 +1,52 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Taller de Proyectos Web</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'estilo.css' %}">
+    </head>
+
+    <section id="wrapper">
+        <div class="login-register" style="background-image:url('/media/[005479].jpg')";>
+            <div class="login-box card">
+                <form class="form-horizontal form-material" role="form" method="post">
+                    <center>
+                        <div style="padding:0px" class="upper">
+                            <img src="/media/1566838554223.png" width="20%" alt="">
+                        </div>
+                    </center>
+                    <center>
+                        <h3 style="padding:5px" class="box-title m-b-20">Inicio de sesión</h3>
+                        <h5>Utilizar Usuario y Contraseña.</h5>
+                    </center>
+                    <div id="panel-log" class="panel panel-default">
+                        <div class="panel-body">
+                            <div style="padding:10px" class="row-frm">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input type="text" name="username" placeholder="Usuario" class="form-control" required="" id="id_username">
+                                </div>
+                            </div>
+                            <div style="padding:10px" class="row-frm">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" name="password" placeholder="Password"" class="form-control" required="" id="id_password">
+                                </div>
+                            </div>
+                            <div class="form-group text-center m-t-2    0">
+                                {% csrf_token %}
+                                <div class="col-xs-12">
+                                    <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Ingresar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</html>

@@ -1,0 +1,80 @@
+{% load staticfiles %} 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Taller de Proyectos Web</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'estilo.css' %}">
+</head>
+
+<div class="row">
+    <!-- left menu -->
+    <div class="col-md-3" style="background-color: rgba(143, 143, 138, 0.705)"> 
+        <div  id="navigation"  class='container-fluid'>
+            <img src="/media/1561920305854.png"></img>
+        </div>
+        <div class="topnav" style="background-color: rgba(0, 0, 0, 0.5)">
+            <center>
+                <h3><a class="active" href="/inicio">Home</a></h3>
+                <h3><a href="/admin">Admin</a></h3>
+                <h3><a href="/descripcion">Descripcion</a></h3>
+                <!-- <h3><a href="/login">Login</a></h3> -->
+                <form method="POST" role="from" action=".">
+                    {% csrf_token %}
+                    <input type="hidden" value="logout" name="cerrar">
+                    <cener><button class="btn btn-info text-uppercase waves-effect waves-light" type="submit">Cerrar Sesión</button>
+                </form>
+            </center> 
+        </div>
+        <p>Bienvenido {{Usuario}}</p>
+
+    </div>
+    <!-- content -->
+    <div class="col-md-9">
+        
+        <body style="background-color: rgb(143, 143, 138, 0.705)">
+
+            {% block Federico %}
+                <div class="row">
+                    <div class="col-md-2">
+                        <center><img src="/media/1555010555353.png" width="60px"></img></center>
+                    </div>
+                </div>    
+            {% endblock %}
+
+            {% block contenido %}
+            <div class="row">
+                <div class="col-md-12">
+                    <center> ( ͡° ͜ʖ ͡°)</center>
+                </div>
+            </div>
+            {% endblock %}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <center><button type="button" onclick = "window.open(src='/media/GraphicDesignIsMyPasion.jpg')">Click Me!</button>
+                </div>
+            </div>
+
+            {% block integrantes %}
+            {% endblock %}
+
+            {% block meme %}
+                <div class="row">
+                <div class="col-md-3">
+                    <center><img src="/media/1566838554223.png" width="300px"></img></center>
+                </div>
+                <div class="col-md-6">
+                    <center><img src="/media/1557332157028.png" width="420px"></img></center>
+                </div>
+                <div class="col-md-3">
+                    <center><img src="/media/1566838554223.png" width="300px"></img></center>
+                </div>
+            </div>
+            {% endblock %}
+        </body>
+    </div>
+</div>
+
+</html>	
