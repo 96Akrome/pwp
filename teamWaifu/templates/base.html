@@ -11,147 +11,82 @@
 </head>
 
 <div class="row">
-
-    <!-- left menu -->
-    {% block menuizq %}
-        {% if user.is_authenticated %}
-            <div class="col-md-2">
-                <div  id="navigation"  class='container-fluid'>
-                    <img src="/media/1554170128026_2.png" width="170px"></img>
-                </div>
-            <div class="topnav" style="background-color: rgba(0, 0, 0, 0.5)">
-                    <center>
-
-
-                        <!-- <form method="POST" role="from" action=".">
-                            {% csrf_token %}
-                                <input type="hidden" value="logout" name="cerrar">
-                                <center><button class="btn btn-info text-uppercase waves-effect waves-light" type="submit">Cerrar Sesión</button></center>
-                        </form> -->
-
-                        <form method="POST" role="from" action=".">
-                            {% csrf_token %}
-                                <input type="hidden" value="logout" name="cerrar">
-                                <center><a href="/logout" class="btn btn-info text-uppercase waves-effect waves-light" type="submit">Cerrar Sesión</a></center>
-                        </form>
-
-                        <form method="POST" role="from" action=".">
-                            {% csrf_token %}
-                                <input type="hidden" value="perfil" name="perfil_home">
-                                <center><button class="btn btn-info text-uppercase waves-effect waves-light" type="submit">Perfil</button></center>
-                        </form>
-                    </center>
-                </div>  
-            </div>
-        {% else %}
-            <div class="col-md-1">
-            </div>
-        {% endif %} 
-    {% endblock %}
-    <!-- content -->
+    <div class="col-md-1">
+    </div>
     
     <div class="col-md-10">
     <div>
-        <body style="background-image: url('/media/ImDePag/[005479].jpg')">
+        <body style="background-image: url('/media/ImDePag/[005479].jpg'); color:whitesmoke; " >
 
             {% block cabezera %}
-                <div class="row" style="background-color: rgba(8, 123, 255, 0.486)">
-                    <div class ="col-md-2">
-                            <center><img src="/media/ImDePag/1570557390586.png" width="500px"></img></center>
-                    </div>
-                    <div class="col-md-9">
+                <div class="row" style="background-color: rgba(207, 99, 99, 0.7)">
+                    <div class ="col-md-4" align="left">
+                        <a class="active" href="/inicio"><img src="/media/ImDePag/logo2.png" width="100%"></img></a>
                         
-                        <center><img src="/media/1555010555353.png" width="70px"></img></center>
+                    </div>
+                    <div class="col-md-3">
+                        {% if user.is_authenticated %}
+                        <a class="active" href="/gacha"><center><img src="/media/ImDePag/gacha2.png" width = "25%" ></img></center></a>
+                        
+                        {% endif %} 
+                    </div>
+                    <div class="col-md-2">
+                        {% if user.is_authenticated %}
+                        
+                        <table style="border-collapse:separate;border-spacing:15px 15px;" >
+                        <tr>
+                        <form method="POST">
+                        {% csrf_token %}
+                            <td><center><input type="image" name = 'moneymaker' value='moneey' src="/media/ImDePag/coin.png" width="35%"></center></td>
+                            <td><h3>{{money}}</h3></td>
+                        </form>
+                        </tr>
+                    
+                    </table>
+                        
+                        {% endif %} 
+                    </div>
+                    <div class="col-md-3" align="right">
+                        {% if user.is_authenticated %}
+                            <a href="/perfil"><img src="/media/perfil/profile_pics/{{profile_pic}}" width="90px" height = "90px" style="border-radius: 50%;" onerror="this.src='/media/ImDePag/user.png';"></img></a>
+                        {% else %}
+                            <a href="/user_login"><img src="/media/ImDePag/user.png" width="25%"></img></a>
+                        {% endif %}                         
                     </div>
                 </div>    
             {% endblock %}
             
             {% block body_block %}
-                {% block barra %}
-                    <div class="row" style="background-color: rgba(0, 2, 3, 0.698)">
-                        <div class="col-md-2">
-                        <h3><a class="active" href="/inicio">Home</a></h3>
-                        </div>
-                        <div class="col-md-2">
-                            <h3><a href="/admin">Admin</a></h3>
-                        </div>
-                        <div class="col-md-2">
-                            <h3><a href="/descripcion">Info</a></h3>
-                        </div>
-                        <div class="col-md-2">
-                            {% if user.is_authenticated %}
-                            {% else %}
-                                <h3><a href="/user_login">Login</a></h3>
-                            {% endif %} 
-                            
-                        </div>
-                        <div class="col-md-2">
-                            {% if user.is_authenticated %}
-                            {% else %}
-                                <h3><a href="/register">Register</a></h3>
-                            {% endif %} 
-                            
-                        </div>
-                    </div>
-                {% endblock %}
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <center><button type="button" onclick = "window.open(src='/media/1570684383224.png')">Click Me!</button>
-                    </div>
-                </div>
 
                 {% block integrantes %}
-                    <center><h1 >Integrantes: </h1></center>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <body>
-                                <center style = 'font-size: 30px' >Nombre: Daniel Pumarino</center>
-                                <center style = 'font-size: 30px' >Nombre: Ignacio Jorquera</center>
-                            </body>
-                        </div>
-                        <div class="col-md-6">
-                            <body>
-                                <center style = 'font-size: 30px'><img src="/media/1557332157028.png" width="60px"></img> Rol: 201873608-2	</center>
-                                <center style = 'font-size: 30px'><img src="/media/1561920305854.png" width="60px"></img> Rol: 201873561-2	</center>
-                            </body>
-                        </div>
-                    </div>
+                <div class="container" style="width:80%; " align="center">
+
+                    <div class="jumbotron" style="background-color: rgba(0, 0, 0, 0.5); color:whitesmoke;">
+
+                    <p>Bienvenid@ al mejor gacha de waifus hecho por un sansano fuera de discord (y el único, quizás), aquí podrás collecionar waifus sin que nadie te 
+                    mire feo por la vida, también puedes agregar a tus amigos!</p>
+                    <p> Que esperas para unirte!</p>
+
+                    <a href="/user_login" >Iniciar sesión</a> 
+                    <a >/</a> 
+                    <a href="/register" >Crear cuenta</a>
+
+                    <p align="left"> Desarrollado por:</p>
+                    <p align="left"> - Ignacio Jorquera</p>
+                    <p align="left"> - Daniel Pumarino</p>
+
+                    <p align="left"> Mención honorífica:</p>
+                    <p align="left"> - PWP 2019-2</p>
+                    
+                
                 {% endblock %}
                 {% block meme %}
-                    <div class="row">
-                    <div class="col-md-3">
-                        <center><img src="/media/1566838554223.png" width="300px"></img></center>
-                    </div>
-                    <div class="col-md-6">
-                        <center><img src="/media/1557332157028.png" width="420px"></img></center>
-                    </div>
-                    <div class="col-md-3">
-                        <center><img src="/media/1566838554223.png" width="300px"></img></center>
-                    </div>
-                </div>
+                
                 {% endblock %}
             {% endblock %}
         </body>
     </div>
 
-    <!-- {% block final %}
-            <center><h1 >Integrantes: </h1></center>
-            <div class="row">
-                <div class="col-md-6">
-                    <body>
-                        <center style = 'font-size: 30px' >Nombre: Daniel Pumarino</center>
-                        <center style = 'font-size: 30px' >Nombre: Ignacio Jorquera</center>
-                    </body>
-                </div>
-                <div class="col-md-6">
-                    <body>
-                        <center style = 'font-size: 30px'><img src="/media/1557332157028.png" width="60px"></img> Rol: 201873608-2	</center>
-                        <center style = 'font-size: 30px'><img src="/media/1561920305854.png" width="60px"></img> Rol: 201873561-2	</center>
-                    </body>
-                </div>
-            </div>
-    {% endblock %} -->
 </div>
 
 </html>	

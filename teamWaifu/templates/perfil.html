@@ -1,15 +1,77 @@
 {% extends 'base.html' %}
 
+
 {% block integrantes %}
-    <center><h1 >Proximamente: </h1></center>
-    <div class="row" style="background-color:rgba(26, 166, 179, 0.661)">
-        <div class="col-md-12">
-            <body>
-                <center style = 'font-size: 30px' > Inventario de waifus.</center>
-                <center style = 'font-size: 30px' >Lista de amigos</center>
-            </body>
-        </div>
+
+<div class="container" style="width:80%; " align="center">
+
+    <div class="jumbotron" style="background-color: rgba(0, 0, 0, 0.5); color:whitesmoke;">
+
+        <table>
+            <tr><td><center ><h1>Bienvenido {{user.username}}</h1></center></td></tr>
+
+            <tr><td><img src='/media/perfil/profile_pics/{{profile_pic}}' alt="image not found" onerror="this.src='/media/ImDePag/user.png';"  width="400"></td></tr>
+            
+        </table>
+
+        <table>
+            <tr>
+                
+                <form enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <td>
+                        <center><input class="btn btn-info text-uppercase waves-effect waves-light" type="file" name="profile_pic" > </center>
+                    </td>
+
+                    <td>
+                        <center><input type="submit" class="btn btn-info text-uppercase waves-effect waves-light" value="Upload" /></center>
+                    </td>
+                </form>
+                
+            </tr>
+            <tr>
+                <td>
+                    <center><a href="/logout" class="btn btn-info text-uppercase waves-effect waves-light" type="submit">Cerrar Sesión</a></center>
+                </td>
+            </tr>
+        </table>
+        
+        <form method="post" action="/perfil/">
+
+			{% csrf_token %}
+        
+            <table style="border-collapse:separate;border-spacing:15px 15px;" >
+                <tr>
+                    <td><input type="text" name="friend" placeholder="Agrega un amigo!"></td>
+                    <td><input type="submit" name="" value="Agregar"></td>
+                </tr>
+            
+            </table>
+
+		</form>
+
+
+        <h1>Amigos:</h1>
+        {% for lista in amigos %}
+        <tr>
+            {% for amigo in lista %}
+                <td><h3>{{amigo}}</h3></td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+        <h1>Waifus:</h1>
+
+        {% for listaW in waifus %}
+        <tr>
+            {% for waifu in listaW %}
+                <td><img src='/media/waifus/{{waifu}}.png' alt="waifu not found :(" width="190px" ></td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
     </div>
+</div>
+
 {% endblock %}
 
 {% block meme %}

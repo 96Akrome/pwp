@@ -1,22 +1,51 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
-      {% if registered %}
-        <h1>Thank you for registering!</h1>
-        <center><h3><a href="/inicio">Volver</a></h3></center>
-      {% else %}
-        <h1>Register Here</h1>
-        <h3>Just fill out the form.</h3>
-<form enctype="multipart/form-data" method="POST">
-          {% csrf_token %}
-          {{ user_form.as_p }}
-          {{ profile_form.as_p }}
-          <input type="submit" name="" value="Register">
-        </form>
-        
-      {% endif %}
-    </div>
-  </div>
+	<div class="container" style="width:50%; " align="center">
+		<div class="jumbotron" style="background-color: rgba(0, 0, 0, 0.5); color:whitesmoke;" >
+
+			{% if registered %}
+				<table>
+					<tr><td><center><h1>Gracias por registrarte!</h1></center></td></tr>
+					<tr><td><center><h3><a href="/user_login">Login</a></h3></center> </td></tr>
+				</table>
+				
+				
+			{% else %}
+				{% if user.is_authenticated %}
+					<table>
+						<tr><td><center style = 'font-size: 10%;'><h3>Bienvenido {{user.username}}</h3></center></td></tr>
+						<tr><td><center><h3><a href="/perfil">Perfil</a></h3></center> </td></tr>
+					</table>
+				
+				{% else %}
+
+
+				
+					<h1><center style = 'font-size: 70%;' >Registro:</center></h1>
+
+					<form enctype="multipart/form-data" method="POST">
+						{% csrf_token %}
+						
+							<table style="border-collapse:separate;border-spacing:15px 15px;" >
+					
+								<tr><td>Nombre de usuario:</td>  <td><input type="text" name="username" value="{{valuedict.username}}"> </td></tr>
+
+								<tr><td>Contraseña:</td>  <td><input type="password" name="password" > </td></tr>
+
+								<tr><td>Imágen de perfil:</td>   <td><input type="file" name="profile_pic">   </td></tr>
+
+								<tr><td> </td> <td><input type="submit" name="" value="Register"></td></tr>
+							
+							</table>
+						
+						<h1><center style = 'font-size: 40%;line-height: 100px;' >Ya estas registrado? click <a href="/user_login">aqui</a> para ingresar.</center></h1>
+					</form>
+			
+				{% endif %}
+				
+			{% endif %}
+
+		</div>
+	</div>
 {% endblock %}

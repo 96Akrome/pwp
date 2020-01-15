@@ -1,28 +1,51 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 # Create your models here.
 
- 
-class Item(models.Model):
-    nombre = models.CharField(max_length = 100, verbose_name = "Elemento", blank = False, null = True)
-    created_date = models.DateTimeField(default=timezone.now)
-    def __str__(self):
-        return u'%s' % self.nombre
 
 class Waifus(models.Model):
-    ident = models.IntegerField()
+    nombre = models.CharField(max_length = 100, blank = False, null = True)
+    waifu_card = models.ImageField(upload_to='waifus',blank=False, null = True)
     def __str__(self):
-        return u'%s' % self.ident
+        return self.nombre
 
-class Friends(models.Model):
-    ident = models.IntegerField()
+class Owned(models.Model):
+    created = models.DateTimeField(auto_now_add = True, editable=False)
+    creator = models.ForeignKey(User, related_name = "waifu_owner_set", on_delete = models.CASCADE)
+    waifu = models.ForeignKey(Waifus, related_name = "waifu_set", on_delete = models.CASCADE)
     def __str__(self):
-        return u'%s' % self.ident
+        return self.waifu.nombre
 
+class Friendship(models.Model):
+    created = models.DateTimeField(auto_now_add = True, editable=False)
+    creator = models.ForeignKey(User, related_name = "friendship_creator_set", on_delete = models.CASCADE)
+    friend = models.ForeignKey(User, related_name = "friend_set", on_delete = models.CASCADE)
+    def __str__(self):
+        return self.friend.username
+ 
 class Usuario(models.Model):
-    user = models.CharField(max_length = 30, verbose_name = "Username", blank = False, null = False)
-    inventario = models.ForeignKey(Waifus, on_delete = models.CASCADE, blank = True, null = True)
-    amigos = models.ForeignKey(Friends, on_delete = models.CASCADE, blank = True, null = True)
-    profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
     def __str__(self):
-        return u'%s' % self.user
+        return self.user.username
+
+class ProfilePic(models.Model):
+    owner = models.ForeignKey(User, related_name = "user_set", on_delete = models.CASCADE)
+    title = models.TextField()
+    cover = models.ImageField(upload_to='perfil/profile_pics')
+    def __str__(self):
+        return self.title
+
+class Money(models.Model):
+    owner = models.ForeignKey(User, on_delete = models.CASCADE)
+    money = models.IntegerField()
+    def __str__(self):
+        return str(self.money)
+    
+
+def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = Usuario.objects.create(user = kwargs['instance'])
+        
+post_save.connect(create_profile, sender=User)

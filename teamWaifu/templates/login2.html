@@ -1,17 +1,42 @@
 {% extends 'base.html' %}
 {% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Login here :</h1>
-<form method="post" action="/user_login/">
-          {% csrf_token %}
-          {# A more "HTML" way of creating the login form#}
-          <label for="username">Username:</label>
-          <input type="text" name="username" placeholder="Username">
-<label for="password">Password:</label>
-          <input type="password" name="password" placeholder="Password">
-<input type="submit" name="" value="Login">
-</form>
+<div class="container" style="width:50%;" align="center">
+	<div class="jumbotron" style="background-color: rgba(0, 0, 0, 0.5); color:whitesmoke;" >
+
+		{% if user.is_authenticated %}
+			<table>
+				<tr><td><center ><h1>Bienvenido {{user.username}}</h1></center></td></tr>
+				<tr><td><cemter><img src='/media/perfil/profile_pics/{{profile_pic}}' alt="image not found" onerror="this.src='/media/ImDePag/user.png';"  width="400"></cemter></td></tr>
+
+				<tr><td><center><h3><a href="/perfil">Perfil</a></h3></center> </td></tr>
+			</table>
+
+		{% else %}
+						
+		<form method="post" action="/user_login/">
+
+			{% csrf_token %}
+				<h1><center style = 'font-size: 70%;' >Login:</center></h1>
+			
+				<table style="border-collapse:separate;border-spacing:15px 15px;" >
+				
+
+					<tr><td><label for="username">Nombre de usuario:</label></td>  
+						<td><input type="text" name="username" placeholder="Username"></td></tr>
+	
+					<tr><td><label for="password">Contraseña:</label></td>  
+						<td><input type="password" name="password" placeholder="Password"></td></tr>
+					
+					<tr><td></td>
+						<td><input type="submit" name="Login" value="Login"></td>
+						<td></td></tr>
+				
+				</table>
+
+				<h1><center style = 'font-size: 40%;line-height: 100px;' >No tienes cuenta? click <a href="/register">aqui</a> para registrarte.</center></h1>
+		</form>
+		{% endif %}
+
+	</div>
 </div>
-  </div>
 {% endblock %}

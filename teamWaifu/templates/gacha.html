@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block integrantes %}
+    <div class="container" style="width:80%; " align="center">
+
+    <div class="jumbotron" style="background-color: rgba(0, 0, 0, 0.5); color:whitesmoke;">
+
+        <table>
+
+            <tr><td><center ><h1>Let's Gacha!</h1></center></td></tr>
+
+            <tr><td><center><img src="/media/ImDePag/gacha2.png" width="80%"></img></center></td></tr>
+            
+            <tr>
+                <td><center><img src="/media/ImDePag/coin2.png" width="50%"></img></center></td>
+
+            </tr>
+            <form method="POST">
+            {% csrf_token %}
+            <tr><td><center><input type="submit" class="btn btn-info text-uppercase waves-effect waves-light" name='gacha' value="Play" /></center>   </td></tr>
+            </form>
+            <tr>
+                <td><center><img src='/media/waifus/{{waifu}}.png' alt="" width="190px" ></center></td>
+            </tr>
+        </table>
+    
+    
+    </div>
+    </div>
+{% endblock %}
+
+{% block meme %}
+{% endblock %}
